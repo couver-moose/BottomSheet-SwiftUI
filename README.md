@@ -1,2 +1,2 @@
 # BottomSheet-SwiftUI
-A little Example App for a BottomSheet in SwiftUI with MapKit
+Beispiel App für ein BottomSheet mit SwiftUi & MapKit 
