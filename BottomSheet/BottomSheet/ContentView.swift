@@ -51,10 +51,8 @@ struct ContentView: View {
         "Kassel",
         "Saarbrücken",
         "Potsdam",
-        "Halle (Saale)",
         "Koblenz",
-        "Oldenburg",
-        "Osnabrück"
+        "Oldenburg"
     ]
 
     
@@ -63,12 +61,15 @@ struct ContentView: View {
         Map()
         .sheet(isPresented: $sheet) {
             VStack {
+                Text("Deutschland")
+                    .font(.title)
+                    .padding()
                 List(cities, id: \.self) { city in
                     Text(city)
                         .listRowBackground(Color.clear)
                 }.scrollContentBackground(.hidden)
             }
-            .presentationDetents([.height(200), .medium]) //Fix punkte für das Sheet (mindestens zwei sonst funktioniert .presentationBackgroundInteraction(.enabled) nicht
+            .presentationDetents([.height(80), .medium]) //Fix punkte für das Sheet (mindestens zwei sonst funktioniert .presentationBackgroundInteraction(.enabled) nicht
             .presentationBackground(.ultraThinMaterial) //Hintergrund des Sheets
             .presentationCornerRadius(30) //Radius der Ecken
             .presentationBackgroundInteraction(.enabled) //Macht das Sheet zum BottomSHeet so kann man mit dem Hintergrund View interagieren
