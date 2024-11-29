@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var sheet = true
     @State private var mapSelection = 0
     
+    @State private var detent : PresentationDetent = .medium
+    
     let cities = [
         "Berlin",
         "München",
@@ -86,19 +88,30 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $sheet) {
-            VStack {
-                Text("Deutschland")
-                    .font(.title)
-                    .padding()
-                List(cities, id: \.self) { city in
-                    Text(city)
-                        .listRowBackground(Color.clear)
-                }.scrollContentBackground(.hidden)
+            TabView {
+                
+                VStack {
+                    
+                    Text("Deutschland")
+                        .font(.title)
+                        .padding()
+                    List(cities, id: \.self) { city in
+                        Text(city)
+                            .listRowBackground(Color.clear)
+                    }.scrollContentBackground(.hidden)
+                }.tabItem {
+                    Image(systemName: "backpack")
+                }
+                
+                Text("...?")
+                    .tabItem {
+                        Image(systemName: "flame")
+                    }
             }
-            .presentationDetents([.height(80), .medium]) //Fix punkte für das Sheet (mindestens zwei sonst funktioniert .presentationBackgroundInteraction(.enabled) nicht
+            .presentationDetents([.height(150), .height(600), .medium], selection: $detent) //Fix punkte für das Sheet (mindestens zwei sonst funktioniert .presentationBackgroundInteraction(.enabled) nicht
             .presentationBackground(.ultraThinMaterial) //Hintergrund des Sheets
             .presentationCornerRadius(30) //Radius der Ecken
-            .presentationBackgroundInteraction(.enabled) //Macht das Sheet zum BottomSHeet so kann man mit dem Hintergrund View interagieren
+            .presentationBackgroundInteraction(.enabled(upThrough: .medium)) //Macht das Sheet zum BottomSHeet so kann man mit dem Hintergrund View interagieren
             .presentationDragIndicator(.visible) //Einstellung für den Drag indicator
             .interactiveDismissDisabled(true) //damit schließt sich das Sheet nicht durch nach unten wischen
         }
