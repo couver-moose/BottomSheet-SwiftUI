@@ -10,8 +10,8 @@ import MapKit
 
 struct ContentView: View {
     
-    @State private var tapped = false
     @State private var sheet = true
+    @State private var mapSelection = 0
     
     let cities = [
         "Berlin",
@@ -57,8 +57,34 @@ struct ContentView: View {
 
     
     var body: some View {
-
-        Map()
+        NavigationStack {
+            ZStack(alignment: .top) {
+                switch mapSelection {
+                    case 0:
+                        Map()
+                        .navigationTitle("Karte")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarHidden(true)
+                    case 1:
+                        VStack {
+                            List(cities, id: \.self) { city in
+                                NavigationLink(city) {
+                                    Text("Wilkommen in: \(city)")
+                                }
+                            }
+                        }
+                    default:
+                        Text("Error")
+                }
+                HStack {
+                    Picker("mapselector", selection: $mapSelection) {
+                        Image(systemName: "map").tag(0)
+                        Image(systemName: "list.bullet").tag(1)
+                    }.pickerStyle(.segmented)
+                    .frame(width: 80)
+                }
+            }
+        }
         .sheet(isPresented: $sheet) {
             VStack {
                 Text("Deutschland")

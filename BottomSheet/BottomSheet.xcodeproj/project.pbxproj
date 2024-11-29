@@ -86,11 +86,12 @@
 				};
 			};
 			buildConfigurationList = A3B177EC2CEDCF62002029C3 /* Build configuration list for PBXProject "BottomSheet" */;
-			developmentRegion = en;
+			developmentRegion = de;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = A3B177E82CEDCF62002029C3;
 			minimizedProjectReferenceProxies = 1;
